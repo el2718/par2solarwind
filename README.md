@@ -30,7 +30,7 @@ This program is licensed under a [CC BY-NC-SA 4.0 License][cc-by-nc-sa].
 * Jun Chen*, Thomas Wiegelmann, Li Feng*, Bernhard Kliem, Chaowei Jiang, and Rui Liu. FastQSL 2: A Comprehensive Toolkit for Magnetic Connectivity Analysis.  2026, SCIENCE CHINA Physics, Mechanics & Astronomy, submitted
 
 -----------------------------
-## Computation `theta_b.f90` with Fortran
+## Computation of `theta_b.f90` with Fortran
 
 * For Linux and macOS (either by ifx/ifort or gfortran):
     ```bash
