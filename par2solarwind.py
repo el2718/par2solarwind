@@ -61,7 +61,7 @@ def par2solarwind(b_lon, b_lat, b_r, lon_rad, lat_rad, radius, \
         else:
             fs1=fs[0,:,:]
             theta_b1=theta_b[0,:,:]       
-        plt.imsave(odir+'bottom_fs.png', fs1, vmin=0., vmax=0.5, origin='lower', cmap='gray')
+        plt.imsave(odir+'bottom_fs.png', fs1, vmin=0., vmax=10., origin='lower', cmap='gray')
         plt.imsave(odir+'bottom_theta_b.png', theta_b1, vmin=0., vmax=0.5, origin='lower', cmap='gray')
         if verbose:
             print(odir+'bottom_fs.png')
