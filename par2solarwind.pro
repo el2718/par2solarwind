@@ -40,7 +40,7 @@ close,  unit
 
 cd, current = cdir
 cd, tmp_dir
-spawn, '/Users/el2718/Desktop/QSLS/update/theta_b.x'
+spawn, '/path/of/theta_b.x'
 cd, cdir
 
 theta_b=fltarr(n_lon, n_lat, n_r1)
