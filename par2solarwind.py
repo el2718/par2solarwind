@@ -39,8 +39,7 @@ def par2solarwind(b_lon, b_lat, b_r, lon_rad, lat_rad, radius, \
         file.write(np.array([nthreads, n_lon, n_lat, n_r1], dtype='i4', order='C'))
     
     os.chdir(tmp_dir)
-    subprocess.run(r'~/Desktop/QSLS/update/theta_b.x', shell=True)
-    # subprocess.run(r'/path/of/theta_b.x', shell=True)
+    subprocess.run(r'/path/of/theta_b.x', shell=True)
     os.chdir(cdir)
 
     theta_b=np.fromfile(tmp_dir+'theta_b.bin', dtype='f4').reshape(shape)
