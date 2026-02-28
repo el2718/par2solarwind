@@ -2,7 +2,7 @@
 
 This program can be downloaded with the command
 ```
-git clone https://github.com/slipq
+git clone https://github.com/par2solarwind
 ```
 
 
