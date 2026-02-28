@@ -87,3 +87,35 @@ This program is licensed under a [CC BY-NC-SA 4.0 License][cc-by-nc-sa].
     ```
     then `$HOME/bin` is a `$PATH` of the system
 * For Windows, use theta_b.exe instead of theta_b.x
+
+-----------------------------
+## Parameters
+
+* **b_lon**, **b_lat**, **b_r**, **lon_rad**, **lat_rad**, **radius** have same meaning of **Bz**, **By**, **Bx**, **xa**, **ya**, **za** in FastQSL2 when **spherical** is invoked
+
+* **RK4Flag**, **step**, **tol**, **maxsteps**, **nthreads**, **silent**, **preview**, **qsl** are the same as those in FastQSL2
+
+* **bottomFlag**: to compute only at the bottom layer
+  * default is 0 (the whole 3D domain)
+-----------------------------
+## Products
+
+If use par2solarwind\.pro, the results are returned by the keywords **fs**, **theta_b**, **qsl**
+
+If use par2solarwind\.py,  the results are returned by the tuple (fs, theta_b, qsl), see the example of demo_par2_charge4\.py
+
+-----------------------------
+## Demos
+
+### If use fastqsl\.pro
+```idl
+IDL> .r demo_par2_charge4.pro
+```
+### If use fastqsl\.py
+```python
+python3 demo_par2_charge4.py
+```
+
+-----------------------------
+## History
+* Feb 26, 2026 Jun Chen, version 1.0
