@@ -96,4 +96,6 @@ write(1) theta_b
 close(1)
 deallocate(p_margin, rboundary, rfs, rfe, theta_b)
 
+! call system('taskkill /im theta_b.exe /f')
+
 end program main
