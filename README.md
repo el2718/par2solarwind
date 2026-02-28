@@ -17,13 +17,13 @@ where $(\varphi_0, \vartheta_0, R_0)$ are the target coordinates traced from $(\
 
 This program can be downloaded with the command
 ```
-git clone https://github.com/par2solarwind
+git clone https://github.com/el2718/par2solarwind
 ```
 
 
 And FastQSL2 should be downloaded first
 ```
-git clone https://github.com/FastQSL2
+git clone https://github.com/el2718/FastQSL2
 ```
 
 Please address comments and suggestions to [Dr. Chen, Jun (陈俊)](mailto:chenjun@pmo.ac.cn)
