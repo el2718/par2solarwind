@@ -6,9 +6,6 @@ and two parameters in this formula are defined as:
 * Magnetic field expansion factor
 $
 f_\mathrm{s}(\varphi, \vartheta, r)=
-\left(\dfrac{R_0}{R_1}\right) ^2
-\dfrac{B_r(\varphi_0, \vartheta_0, R_0)}
-{B_r(\varphi_1, \vartheta_1, R_1)}, 
 $
 where $(\varphi_0, \vartheta_0, R_0)$ are the target coordinates traced from $(\varphi, \vartheta, r)$ to the inner boundary of $r=R_0$, and $(\varphi_1, \vartheta_1, R_1)$ are the target coordinates traced from $(\varphi, \vartheta, r)$ to the outer boundary of $r=R_1$.
 * $\theta_b(\varphi, \vartheta, r)$, the minimum angular distance of an open-field footpoint from a coronal hole boundary.
