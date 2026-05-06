@@ -4,9 +4,7 @@
 $v_\textrm{sw}=265+\dfrac{25}{f_s^{2/7}} \left(5-1.1\times \exp(1-(\theta_b/4)^2)\right)~\mathrm{km/s}, $
 and two parameters in this formula are defined as:
 * Magnetic field expansion factor
-$
-f_\mathrm{s}(\varphi, \vartheta, r)=
-$
+$f_\textrm{s}(\varphi, \vartheta, r)=$
 where $(\varphi_0, \vartheta_0, R_0)$ are the target coordinates traced from $(\varphi, \vartheta, r)$ to the inner boundary of $r=R_0$, and $(\varphi_1, \vartheta_1, R_1)$ are the target coordinates traced from $(\varphi, \vartheta, r)$ to the outer boundary of $r=R_1$.
 * $\theta_b(\varphi, \vartheta, r)$, the minimum angular distance of an open-field footpoint from a coronal hole boundary.
 * For a closed field line, its **rboundary** is 11, its $f_\mathrm{s}$ is set to 1000., its $\theta_b$ is set to 0., these default values can be adjusted in par2solarwind\.pro (par2solarwind\.py)
