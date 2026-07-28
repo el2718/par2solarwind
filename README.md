@@ -63,7 +63,7 @@ Springer Nature: https://link.springer.com/article/10.1007/s11433-025-2982-2
 arXiv: https://arxiv.org/pdf/2604.16195
 
 -----------------------------
-## Computation of `theta_b.f90` with Fortran
+## Compile `theta_b.f90`
 
 * For Linux and macOS (either by ifx/ifort or gfortran):
     ```bash
