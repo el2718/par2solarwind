@@ -59,6 +59,4 @@ restore, bfile
 
 par2solarwind, b_lon, b_lat, b_r, lon_rad, lat_rad, radius, fs=fs, theta_b=theta_b, qsl=qsl, /preview, /bottom
 
-save, filename='bottom_fs,theta_b.sav', fs, theta_b
-
 end
