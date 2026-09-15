@@ -1,7 +1,15 @@
 pro par2solarwind, b_lon, b_lat, b_r, lon_rad, lat_rad, radius,           $
 RK4Flag=RK4Flag, step=step, tol=tol, maxsteps=maxsteps,                   $
-bottomFlag=bottomFlag, nthreads=nthreads, silent=silent, preview=preview, $
+bottomFlag=bottomFlag, nthreads=nthreads, silent=silent, fname=fname, preview=preview, $
 fs=fs, theta_b=theta_b, qsl=qsl
+;------------------------------------------------------------
+; inputted by par2solarwind, Bvec, lon_rad, lat_rad, radius, ...
+if (size(b_lon))[0] eq 4 then begin
+    radius=temporary(lon_rad)
+    lat_rad=temporary(b_r)
+    lon_rad=temporary(b_lat)
+endif
+if ~keyword_set(fname) then fname='bottom'
 ;------------------------------------------------------------
 n_lon= n_elements(lon_rad)
 n_lat= n_elements(lat_rad)
@@ -18,7 +26,7 @@ endelse
 fastqsl, b_lon, b_lat, b_r, xa=lon_rad, ya=lat_rad, za=radius, /spherical, $
 RK4Flag=RK4Flag, step=step, tol=tol, maxsteps=maxsteps,                    $
 seed=seed, /rf, /targetB, tmp_dir=tmp_dir, /keep, odir=odir,               $
-nthreads=nthreads, silent=silent, preview=preview, qsl=qsl
+nthreads=nthreads, silent=silent, fname=fname, preview=preview, qsl=qsl
 ;fs----------------------------------------------------------
 brs=reform(qsl.bs[2,*,*,*])
 bre=reform(qsl.be[2,*,*,*])
@@ -40,7 +48,7 @@ close,  unit
 
 cd, current = cdir
 cd, tmp_dir
-spawn, '/path/of/theta_b.x'
+spawn, '/Users/el2718/Desktop/QSLS/update/theta_b.x'
 cd, cdir
 
 theta_b=fltarr(n_lon, n_lat, n_r1)
@@ -53,11 +61,11 @@ file_delete, tmp_dir, /recursive
 
 verbose  =~keyword_set(silent)
 if preview then begin
-    write_png, odir+'bottom_fs.png', bytscl(fs[*,*,0], min=0, max=10, /nan)
-    write_png, odir+'bottom_theta_b.png', bytscl(theta_b[*,*,0], min=0, max=0.5, /nan)
+    write_png, odir+fname+'_fs.png', bytscl(fs[*,*,0], min=0, max=10, /nan)
+    write_png, odir+fname+'_theta_b.png', bytscl(theta_b[*,*,0], min=0, max=0.5, /nan)
     if verbose then begin
-        print, odir+'bottom_fs.png'
-        print, odir+'bottom_theta_b.png'
+        print, odir+fname+'_fs.png'
+        print, odir+fname+'_theta_b.png'
     endif
 endif
 

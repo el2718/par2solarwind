@@ -2,10 +2,17 @@ import numpy as np
 import os, subprocess
 from fastqsl import fastqsl
 import matplotlib.pyplot as plt
-
-def par2solarwind(b_lon, b_lat, b_r, lon_rad, lat_rad, radius, \
+def par2solarwind(b_lon=None, b_lat=None, b_r=None, lon_rad=None, lat_rad=None, radius=None, *, \
                   RK4Flag=False, step=1.0, tol=1.0e-4, maxsteps=None, \
-                  bottomFlag=False, nthreads=0, silent=False, preview=False):
+                  bottomFlag=False, nthreads=0, silent=False, fname='bottom', preview=False):
+    # ------------------------------------------------------------
+    # inputted by par2solarwind(Bvec, lon_rad, lat_rad, radius, ...
+    if lon_rad is not None and lat_rad is None:
+        radius=lon_rad
+        lat_rad=b_r
+        lon_rad=b_lat
+        b_r=None
+        b_lat=None
     # ------------------------------------------------------------
     seed='original_bottom' if bottomFlag else 'original'
     cdir = os.getcwd()+os.sep
@@ -14,10 +21,10 @@ def par2solarwind(b_lon, b_lat, b_r, lon_rad, lat_rad, radius, \
     qsl=fastqsl(b_lon, b_lat, b_r, xa=lon_rad, ya=lat_rad, za=radius, spherical=True, \
                 RK4Flag=RK4Flag, step=step, tol=tol, maxsteps=maxsteps, nthreads=nthreads, \
                 seed=seed, rF_out=True, targetB_out=True, \
-                silent=silent, tmp_dir=tmp_dir, keep_tmp=True, preview=preview)
+                silent=silent, tmp_dir=tmp_dir, keep_tmp=True, fname=fname, preview=preview)
     # ------------------------------------------------------------
-    n_lon= len(lon_rad)
-    n_lat= len(lat_rad)
+    n_r, n_lat, n_lon= b_lon.shape[0:3]
+
     if bottomFlag:
         n_r1 = 1
         brs=qsl['Bs'][:,:,2]
@@ -39,7 +46,8 @@ def par2solarwind(b_lon, b_lat, b_r, lon_rad, lat_rad, radius, \
         file.write(np.array([nthreads, n_lon, n_lat, n_r1], dtype='i4', order='C'))
     
     os.chdir(tmp_dir)
-    subprocess.run(r'/path/of/theta_b.x', shell=True)
+    subprocess.run(r'~/Desktop/QSLS/update/theta_b.x', shell=True)
+    # subprocess.run(r'/path/of/theta_b.x', shell=True)
     os.chdir(cdir)
 
     theta_b=np.fromfile(tmp_dir+'theta_b.bin', dtype='f4').reshape(shape)
@@ -60,12 +68,12 @@ def par2solarwind(b_lon, b_lat, b_r, lon_rad, lat_rad, radius, \
             theta_b1=theta_b
         else:
             fs1=fs[0,:,:]
-            theta_b1=theta_b[0,:,:]       
-        plt.imsave(odir+'bottom_fs.png', fs1, vmin=0., vmax=10., origin='lower', cmap='gray')
-        plt.imsave(odir+'bottom_theta_b.png', theta_b1, vmin=0., vmax=0.5, origin='lower', cmap='gray')
+            theta_b1=theta_b[0,:,:]
+        plt.imsave(odir+fname+'_fs.png', fs1, vmin=0., vmax=10., origin='lower', cmap='gray')
+        plt.imsave(odir+fname+'_theta_b.png', theta_b1, vmin=0., vmax=0.5, origin='lower', cmap='gray')
         if verbose:
-            print(odir+'bottom_fs.png')
-            print(odir+'bottom_theta_b.png')
+            print(odir+fname+'_fs.png')
+            print(odir+fname+'_theta_b.png')
 
     if verbose:
         print('{0:<20}{1:<10}'.format('fs', fs.dtype.name), fs.shape)
