@@ -111,7 +111,7 @@ arXiv: https://arxiv.org/pdf/2604.16195
 
 * **b_lon**, **b_lat**, **b_r**, **lon_rad**, **lat_rad**, **radius** have same meaning of **Bz**, **By**, **Bx**, **xa**, **ya**, **za** in FastQSL2 when **spherical** is invoked
 
-* **RK4Flag**, **step**, **tol**, **maxsteps**, **nthreads**, **silent**, **preview**, **qsl** are the same as those in FastQSL2
+* **RK4Flag**, **step**, **tol**, **maxsteps**, **nthreads**, **silent**, **fname**, **preview**, **qsl** are the same as those in FastQSL2
 
 * **bottomFlag**: to compute only at the bottom layer
   * default is 0 (the whole 3D domain)
