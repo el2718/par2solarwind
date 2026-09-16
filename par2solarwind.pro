@@ -1,9 +1,9 @@
-pro par2solarwind, b_lon, b_lat, b_r, lon_rad, lat_rad, radius,           $
-RK4Flag=RK4Flag, step=step, tol=tol, maxsteps=maxsteps,                   $
-bottomFlag=bottomFlag, nthreads=nthreads, silent=silent, fname=fname, preview=preview, $
-fs=fs, theta_b=theta_b, qsl=qsl
+pro par2solarwind, b_lon, b_lat, b_r, lon_rad, lat_rad, radius, $
+RK4Flag=RK4Flag, step=step, tol=tol, maxsteps=maxsteps,         $
+nthreads=nthreads, silent=silent, fname=fname, preview=preview, $
+bottomFlag=bottomFlag, fs=fs, theta_b=theta_b, qsl=qsl
 ;------------------------------------------------------------
-; inputted by par2solarwind, Bvec, lon_rad, lat_rad, radius, ...
+; inputted by par2solarwind, Bvec, lon_rad, lat_rad=, radius, ...
 if (size(b_lon))[0] eq 4 then begin
     radius=temporary(lon_rad)
     lat_rad=temporary(b_r)
