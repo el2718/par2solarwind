@@ -136,3 +136,4 @@ python3 demo_par2_charge4.py
 ## History
 * Feb 26, 2026 Jun Chen, version 1.0, suggested by Chaowei Jiang
 * Sep 16, 2026 Jun Chen, support the input format as `par2solarwind, Bvec, ...`
+* Sep, 20, 2026 Jun Chen, accommodate the change in fastqsl.py returning **qsl** as an object instead of a dictionary.
