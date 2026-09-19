@@ -27,19 +27,19 @@ def par2solarwind(b_lon=None, b_lat=None, b_r=None, lon_rad=None, lat_rad=None, 
 
     if bottomFlag:
         n_r1 = 1
-        brs=qsl['Bs'][:,:,2]
-        bre=qsl['Be'][:,:,2] 
+        brs=qsl.Bs[:,:,2]
+        bre=qsl.Be[:,:,2] 
         shape=(n_lat, n_lon)
     else:
         n_r1 = len(radius)
-        brs=qsl['Bs'][:,:,:,2]
-        bre=qsl['Be'][:,:,:,2]
+        brs=qsl.Bs[:,:,:,2]
+        bre=qsl.Be[:,:,:,2]
         shape=(n_r, n_lat, n_lon)
 
     fs=np.zeros(shape,'f4')+1000.
-    index12=qsl['rboundary'] == 12
+    index12= qsl.rboundary == 12
     fs[index12]= (radius[0]/radius[-1])**2. * np.abs(brs[index12]/bre[index12])
-    index21=qsl['rboundary'] == 21
+    index21= qsl.rboundary == 21
     fs[index21]= (radius[0]/radius[-1])**2. * np.abs(bre[index21]/brs[index21])
     # ------------------------------------------------------------
     with open(tmp_dir+'dimension.bin','wb') as file:
