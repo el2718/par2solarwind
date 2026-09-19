@@ -41,6 +41,7 @@ implicit none
 integer:: i, j, k, nthreads, OMP_GET_NUM_PROCS
 logical:: margin_open
 real:: vp(0:2)
+character(len=1) :: str_aux
 !----------------------------------------------------------------------------
 open(unit=1, file='dimension.bin', access='stream', status='old')
 read(1) nthreads, n_lon, n_lat, n_r
@@ -96,6 +97,8 @@ write(1) theta_b
 close(1)
 deallocate(p_margin, rboundary, rfs, rfe, theta_b)
 
-! call system('taskkill /im theta_b.exe /f')
+call get_environment_variable("HOME", str_aux)
+if (str_aux .ne. "/") &
+call system('taskkill /im theta_b.exe /f')
 
 end program main
