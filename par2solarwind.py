@@ -75,10 +75,7 @@ def par2solarwind(b_lon=None, b_lat=None, b_r=None, lon_rad=None, lat_rad=None, 
             print(odir+fname+'_theta_b.png')
 
     if verbose:
-        print('{0:<20}{1:<10}'.format('fs', fs.dtype.name), fs.shape)
-        print('{0:<20}{1:<10}'.format('theta_b', theta_b.dtype.name), theta_b.shape)
+        print('{0:<17}{1:<10}'.format('fs', fs.dtype.name), fs.shape)
+        print('{0:<17}{1:<10}'.format('theta_b', theta_b.dtype.name), theta_b.shape)
 
     return fs, theta_b, qsl
-
-
-
