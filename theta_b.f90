@@ -81,8 +81,12 @@ do i=0, n_lon-1
     endif
 enddo
 enddo
-!----------------------------------------------------------------------------
-!$OMP PARALLEL DO PRIVATE(i,j,k), schedule(DYNAMIC)
+!------------------------------------------------------------
+! https://www.openmp.org/spec-html/5.0/openmpsu112.html
+if (nthreads .gt. OMP_GET_NUM_PROCS()) nthreads=OMP_GET_NUM_PROCS()
+if (nthreads .eq. 0) nthreads=OMP_GET_NUM_PROCS()-2
+
+!$OMP PARALLEL DO PRIVATE(i,j,k), num_threads(nthreads), schedule(DYNAMIC)
 do i=0, n_lon-1
 do j=0, n_lat-1
 do k=0, n_r-1
@@ -96,9 +100,5 @@ open(unit=1, file='theta_b.bin', access='stream', status='replace')
 write(1) theta_b
 close(1)
 deallocate(p_margin, rboundary, rfs, rfe, theta_b)
-
-call get_environment_variable("HOME", str_aux)
-if (str_aux .ne. "/") &
-call system('taskkill /im theta_b.exe /f')
 
 end program main
