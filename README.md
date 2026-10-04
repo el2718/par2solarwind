@@ -123,11 +123,11 @@ If use par2solarwind\.py,  the results are returned by the tuple (fs, theta_b, q
 -----------------------------
 ## Demos
 
-### If use fastqsl\.pro
+### If use par2solarwind\.pro
 ```idl
 IDL> .r demo_par2_charge4.pro
 ```
-### If use fastqsl\.py
+### If use par2solarwind\.pro
 ```python
 python3 demo_par2_charge4.py
 ```
