@@ -1,6 +1,6 @@
-pro par2solarwind, b_lon, b_lat, b_r, lon_rad, lat_rad, radius, $
-RK4Flag=RK4Flag, step=step, tol=tol, maxsteps=maxsteps,         $
-nthreads=nthreads, silent=silent, fname=fname, preview=preview, $
+pro par2solarwind, b_lon, b_lat, b_r, lon_rad, lat_rad, radius,        $
+openfs=openfs, RK4Flag=RK4Flag, step=step, tol=tol, maxsteps=maxsteps, $
+nthreads=nthreads, silent=silent, fname=fname, preview=preview,        $
 bottomFlag=bottomFlag, fs=fs, theta_b=theta_b, qsl=qsl
 ;------------------------------------------------------------
 ; inputted by par2solarwind, Bvec, lon_rad, lat_rad=, radius, ...
@@ -9,7 +9,8 @@ if (size(b_lon))[0] eq 4 then begin
     lat_rad=temporary(b_r)
     lon_rad=temporary(b_lat)
 endif
-if ~keyword_set(fname) then fname='bottom'
+if ~keyword_set(fname)  then fname='bottom'
+if ~keyword_set(openfs) then openfs=1000.
 ;------------------------------------------------------------
 n_lon= n_elements(lon_rad)
 n_lat= n_elements(lat_rad)
@@ -31,7 +32,7 @@ nthreads=nthreads, silent=silent, fname=fname, preview=preview, qsl=qsl
 brs=reform(qsl.bs[2,*,*,*])
 bre=reform(qsl.be[2,*,*,*])
 
-fs=fltarr(n_lon, n_lat, n_r1)+1000.
+fs=fltarr(n_lon, n_lat, n_r1)+openfs
 
 index12=where(qsl.rboundary eq 12)
 if (index12[0] ne -1) then $

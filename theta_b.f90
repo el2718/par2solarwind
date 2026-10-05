@@ -41,7 +41,6 @@ implicit none
 integer:: i, j, k, nthreads, OMP_GET_NUM_PROCS
 logical:: margin_open
 real:: vp(0:2)
-character(len=1) :: str_aux
 !----------------------------------------------------------------------------
 open(unit=1, file='dimension.bin', access='stream', status='old')
 read(1) nthreads, n_lon, n_lat, n_r
@@ -84,7 +83,7 @@ enddo
 !------------------------------------------------------------
 ! https://www.openmp.org/spec-html/5.0/openmpsu112.html
 if (nthreads .gt. OMP_GET_NUM_PROCS()) nthreads=OMP_GET_NUM_PROCS()
-if (nthreads .eq. 0) nthreads=OMP_GET_NUM_PROCS()-2
+if (nthreads .eq. 0) nthreads=max(1, OMP_GET_NUM_PROCS()-2)
 
 !$OMP PARALLEL DO PRIVATE(i,j,k), num_threads(nthreads), schedule(DYNAMIC)
 do i=0, n_lon-1

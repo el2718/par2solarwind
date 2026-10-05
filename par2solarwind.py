@@ -3,7 +3,7 @@ import os, subprocess
 from fastqsl import fastqsl
 import matplotlib.pyplot as plt
 def par2solarwind(b_lon=None, b_lat=None, b_r=None, lon_rad=None, lat_rad=None, radius=None, *, \
-                  RK4Flag=False, step=1.0, tol=1.0e-4, maxsteps=None, \
+                  openfs=1000., RK4Flag=False, step=1.0, tol=1.0e-4, maxsteps=None,  \
                   bottomFlag=False, nthreads=0, silent=False, fname='bottom', preview=False):
     # ------------------------------------------------------------
     # inputted by par2solarwind(Bvec, lon_rad, lat_rad, radius, ...
@@ -36,7 +36,7 @@ def par2solarwind(b_lon=None, b_lat=None, b_r=None, lon_rad=None, lat_rad=None, 
         bre=qsl.Be[:,:,:,2]
         shape=(n_r, n_lat, n_lon)
 
-    fs=np.zeros(shape,'f4')+1000.
+    fs=np.zeros(shape,'f4')+openfs
     index12= qsl.rboundary == 12
     fs[index12]= (radius[0]/radius[-1])**2. * np.abs(brs[index12]/bre[index12])
     index21= qsl.rboundary == 21
