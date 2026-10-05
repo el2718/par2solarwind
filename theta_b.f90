@@ -39,11 +39,11 @@ program main
 use theta_b0
 implicit none
 integer:: i, j, k, nthreads, OMP_GET_NUM_PROCS
-logical:: margin_open
+logical:: margin_open, repeat_lon
 real:: vp(0:2)
 !----------------------------------------------------------------------------
 open(unit=1, file='dimension.bin', access='stream', status='old')
-read(1) nthreads, n_lon, n_lat, n_r
+read(1) nthreads, n_lon, n_lat, n_r, repeat_lon
 close(1, status='delete')
 
 allocate(p_margin(0:2, 0:n_lon*n_lat-1))
@@ -71,6 +71,14 @@ do i=0, n_lon-1
         if (i-1 .ge. 0)     margin_open = margin_open .or. (rboundary(i-1,j,0) .eq. 11)
         if (j+1 .lt. n_lat) margin_open = margin_open .or. (rboundary(i,j+1,0) .eq. 11)
         if (j-1 .ge. 0)     margin_open = margin_open .or. (rboundary(i,j-1,0) .eq. 11)
+        if (repeat_lon) then
+            if (i .eq. n_lon-1) margin_open = margin_open .or. (rboundary(1,j,0) .eq. 11)
+            if (i .eq. 0)   margin_open = margin_open .or. (rboundary(n_lon-2,j,0) .eq. 11)
+        else
+            if (i .eq. n_lon-1) margin_open = margin_open .or. (rboundary(0,j,0) .eq. 11)
+            if (i .eq. 0)   margin_open = margin_open .or. (rboundary(n_lon-1,j,0) .eq. 11)
+        endif
+
         if (margin_open) then
             if (rboundary(i,j,0) .eq. 12) vp=rfs(:,i,j,0)
             if (rboundary(i,j,0) .eq. 21) vp=rfe(:,i,j,0)
@@ -83,7 +91,7 @@ enddo
 !------------------------------------------------------------
 ! https://www.openmp.org/spec-html/5.0/openmpsu112.html
 if (nthreads .gt. OMP_GET_NUM_PROCS()) nthreads=OMP_GET_NUM_PROCS()
-if (nthreads .eq. 0) nthreads=max(1, OMP_GET_NUM_PROCS()-2)
+if (nthreads .le. 0) nthreads=max(1, OMP_GET_NUM_PROCS()-2)
 
 !$OMP PARALLEL DO PRIVATE(i,j,k), num_threads(nthreads), schedule(DYNAMIC)
 do i=0, n_lon-1

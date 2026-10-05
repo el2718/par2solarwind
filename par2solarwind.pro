@@ -42,9 +42,11 @@ index21=where(qsl.rboundary eq 21)
 if (index21[0] ne -1) then $
 fs[index21]= (radius[0]/radius[n_r-1])^2.* abs(bre(index21)/brs(index21))
 ;theta_b-----------------------------------------------------
+repeat_lon= abs(!pi*2-(lon_rad[n_lon-1]-lon_rad[0])) lt 0.01*(lon_rad[n_lon-1]-lon_rad[n_lon-2])
+
 get_lun, unit
 openw,  unit, tmp_dir+'dimension.bin'
-writeu, unit, long([nthreads, n_lon, n_lat, n_r1])
+writeu, unit, long([nthreads, n_lon, n_lat, n_r1, repeat_lon])
 close,  unit
 
 cd, current = cdir

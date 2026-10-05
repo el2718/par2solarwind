@@ -42,8 +42,9 @@ def par2solarwind(b_lon=None, b_lat=None, b_r=None, lon_rad=None, lat_rad=None, 
     index21= qsl.rboundary == 21
     fs[index21]= (radius[0]/radius[-1])**2. * np.abs(bre[index21]/brs[index21])
     # ------------------------------------------------------------
+    repeat_lon= np.abs(np.pi*2-(lon_rad[n_lon-1]-lon_rad[0])) < 0.01*(lon_rad[n_lon-1]-lon_rad[n_lon-2])
     with open(tmp_dir+'dimension.bin','wb') as file:
-        file.write(np.array([nthreads, n_lon, n_lat, n_r1], dtype='i4', order='C'))
+        file.write(np.array([nthreads, n_lon, n_lat, n_r1, repeat_lon], dtype='i4', order='C'))
     
     os.chdir(tmp_dir)
     subprocess.run(r'/path/of/theta_b.x', shell=True)
