@@ -120,7 +120,7 @@ If use par2solarwind\.pro, the results are returned by the keywords **fs**, **th
 
 If use par2solarwind\.py,  the results are returned by the tuple (fs, theta_b, qsl), see the example of demo_par2_charge4\.py
 
-Please note that the unit of **theta_b** hear is in radians, while the unit in [Arge (2003)](https://pubs.aip.org/aip/acp/article-abstract/679/1/190/1010917/Improved-Method-for-Specifying-Solar-Wind-Speed?redirectedFrom=fulltext) is in degrees
+Please note that the unit of **theta_b** here is in radians, while the unit in [Arge (2003)](https://pubs.aip.org/aip/acp/article-abstract/679/1/190/1010917/Improved-Method-for-Specifying-Solar-Wind-Speed?redirectedFrom=fulltext) is in degrees
 
 -----------------------------
 ## Demos
